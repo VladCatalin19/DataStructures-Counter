@@ -1,0 +1,119 @@
+-------------------------------------------------------------------------------
+Vlad Marius-Cătălin 315CD
+Anul I Semestrul II
+Tema1 Structuri de Date
+-------------------------------------------------------------------------------
+
+    Pe lângă funcțiile predefinite în „list.h”, am adăugat 5 funcții ajută-
+toare:
+
+int ghiseu_gol (List **ghisee, int numar_ghiseu):
+        Verifică dacă ghiseul cu numărul „numar_ghiseu” este gol. Dacă amândoi
+    poiter-ii, de la începutul și sfărșitul listei, sunt NULL-i înseamnă că
+    lista este vidă.
+
+int vector_ghiseu_gol (List **ghisee):
+        Verifică dacă vectorul cu ghișee este gol.
+
+int date_invalide (int numar_ghiseu):
+        Verifică dacă se apelează un ghiseu care nu a fost deschis prin compara-
+    rea numărului ghișeului cu numărul total de ghișee deschise.
+
+void dezaloca_lista (List **list):
+        Verifică dacă lista este vidă. În caz contrar, eliberează memoria aloca-
+    tă pentru ea. Se pornește de la al doilea nod și se eliberează memoria pentru
+    nodul predesor până când se ajunge la ultimul nod.
+        La final, se dezalocă memoria pentru ultimul nod și pentru pointer-ul că-
+    tre listă.
+
+    Deoarece funcțiile „inchide_ghisee” și „adauga_persoana” au fost folosite
+înainte de declararea lor inițială, au fost mutate la început.
+
+    Explicarea funcțiilor predefinite:
+
+inchide_ghisee:
+        Verifică dacă vectorul de ghisee este deja gol. În caz contrar, se elibe-
+    rează memoria pentru fiecare listă de persoane. La final se dezalocă memoria
+    și pentru vector.
+
+adauga_persoana
+        Se alocă memori pentru un nod cu datele transmise ca parametru.
+        Dacă la ghiseu nu mai sunt alte persoane, persoana adăgată va fi și prima
+    și ultima.
+        Dacă mai este o persoană la ghiseu, se compară prioritățile acestora. Dacă
+    prioritatea persoanei care trebuie adăugată este mai mare, atunci aceasta este
+    pusă prima. Dacă prioritatea este mai mică, persoana se adaugă la sfârșit. Dacă
+    prioritățile persoanelor este egală, se compară numele lor și se va adăuga la
+    început sau la final în funcție de numele acestora, în ordine alfabetică.
+        Dacă la ghiseu sunt mai multe persoane, se compară prioritatea persoanei
+    din față cu persoana ce urmează să fie adăugată. Se adaugă doar dacă priorita-
+    tea este mai mare. Dacă cele 2 persoane au aceeași prioritate, se adaugă în
+    funcție de numele lor, alfabetic.
+        Dacă nu s-a putut introduce înainte sau după prima persoană, se caută pozi-
+    ția corectă. Se compară prioritatea persoanei ce urmează să fie adăugată cu
+    prioritățile celorlalte persoane până când se întâlnește valoarea respectivă.
+    Dacă nu se găsește prioritatea persoanei care urmează să fie adăugată, se va
+    insera la finalul listei.
+        În caz contrar, se va căuta poziția unde trebuie adăugată pentru ca lista
+    să fie ordonată alfabetic.
+
+deschide_ghisee:
+        Daca vectorul de ghișee care este dat ca parametru este gol, atunci se a-
+    locă memorie pentru cele „N” ghișee. Fiecare ghișeu va fi inițializat cu o
+    listă vidă și se va schimba valoarea variabile globale ce reține numărul de
+    ghișee deschise.
+        În cazul în care există deja un număr de ghișee deschise, se creează o lis-
+    tă și se adaugă toate persoanele de la toate ghișeele. Se calculează numărul
+    total de persoane din listă și lista va fi ordonată descrescător după priorită-
+    țile acestora. Se folosește metoda sortării cu bule.
+        Se alocă memorie pentru noul vector de ghișee și se inițializează ghișeele
+    cu liste vide.
+        Se adaugă câte o persoană la fiecare ghișeu din lista ordonată, astfel per-
+    soanele cu cea mai mare prioritate vor sta în față la fiecare ghișeu. Se ia câ-
+    te o persoană din listă, se adaugă la un ghișeu și se trece la urmatorul ghișeu
+    până când lista se golește. Dacă se ajunge la ultimul ghișeu, se va trece la
+    primul ghișeu pentru adăugare de persoane.
+        La final se eliberează memoria vectorului de ghișee vechi și a pointer-ului
+    catre lista ordonată.
+
+sterge_persoana:
+        Ștergerea se face pe mai multe cazuri:
+        Dacă persoana care trebuie ștearsă este singură în ghișeu, se șterge per-
+    soana și lista de oameni la ghișeu se golește.
+        Dacă la ghișeu sunt mai multe persoane, iar cea care trebuie ștearsă este
+    prima, se șterge din listă și următoarea persoană devine prima.
+        Similar cu cazul precedent, când persoana este ultima, se va șterge din
+    listă, iar persoana din fața acesteia devine prima.
+        Dacă nu este nici prima, nici ultima, atunci se caută persoana în listă și
+    se șterge.
+
+sterge_primii_oameni:
+        Pentru fiecare ghișeu se verifică dacă sunt persoane în așteptare. În caz
+    afirmativ, se verifică dacă la ghișeu este doar o persoană. Dacă este doar una,
+    se șterge persoana și se schimbă pointer-i către prima și ultima persoană cu
+    valoarea „NULL”.
+        Dacă se află mai multe persoane, se elimină prima și următoarea devine
+    prima.
+
+calculeaza_numar_oameni_ghiseu:
+        Se returnează printr-o variabilă numărul de persoane la ghișeu, parcurgând
+    lista o singură dată.
+
+calculeaza_numar_total_oameni:
+        Asemănător cu funția precedentă, se reține într-o variabilă numărul total
+    de persoane din toate ghișeele. Se parcurg, pe rând, listele de la fiecare ghi-
+    șeu și se calculează numărul de persoane.
+
+gaseste_pozitia_persoana:
+        Mai întâi se caută prioritatea persoanei. Dacă nu se găsește, atunci per-
+    soana nu este în listă. Dacă a fost găsită prioritatea, se caută numele aces-
+    teia. Dacă se găsește, se returnează poziția ei.
+
+gaseste_persoana_din_fata:
+        Analog cu algoritmul de la subprogramul anterior, se gaseste persoana în
+    listă și se returnează numele celei din fața, dacă există.
+
+afiseaza_rand_ghiseu:
+        Se verifică dacă ghișeul este gol și în caz afirmativ se afișează că ghi-
+    șeul este gol.
+        În caz negativ, se afișează totate persoanele, până la finalul listei.
